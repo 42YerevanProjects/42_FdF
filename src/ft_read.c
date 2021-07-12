@@ -6,7 +6,7 @@
 /*   By: shovsepy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 18:33:05 by shovsepy          #+#    #+#             */
-/*   Updated: 2021/07/09 18:33:08 by shovsepy         ###   ########.fr       */
+/*   Updated: 2021/07/12 15:21:20 by shovsepy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ static void	count_lines(t_fdf *fdf, char *map_file)
 		if (*line == '\0')
 			break ;
 		len = count_values(line);
-		if (len > cols)
-			cols = len;
-		(cols == len) ? rows += 1 : ft_error("Not a valid file!!!", 4);
+		ft_check(&cols, &rows, &len);
 		free(line);
 	}
 	if (close(fd) < 0)
@@ -66,7 +64,8 @@ static void	get_values(t_fdf *fdf, int y, int z, char *line)
 	int		i;
 	char	**split;
 
-	if ((split = ft_split(line, ' ')))
+	split = ft_split(line, ' ');
+	if (split)
 	{
 		i = 0;
 		while (split[i] && (y != fdf->map.width))
@@ -74,7 +73,7 @@ static void	get_values(t_fdf *fdf, int y, int z, char *line)
 			fdf->map.values[z][y] = ft_atoi(split[i++]);
 			y += 1;
 		}
-		free(split);
+		ft_free((void **) split);
 	}
 }
 
@@ -88,9 +87,7 @@ void	ft_read(char *map_file, t_fdf *fdf)
 	y = 0;
 	z = 0;
 	count_lines(fdf, map_file);
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		ft_error("Error opening file!!!", 1);
+	fd = ft_open(map_file);
 	fdf->map.values = (int **)malloc(sizeof(int *) * fdf->map.height);
 	if (!fdf->map.values)
 		ft_error("Memory Allocation failed!!!", 3);
@@ -101,7 +98,7 @@ void	ft_read(char *map_file, t_fdf *fdf)
 			ft_error("Memory Allocation failed! :O", 3);
 		get_values(fdf, y, z, line);
 		y = 0;
-		z += 1;
+		z++;
 		free(line);
 	}
 	if (close(fd) < 0)
