@@ -6,13 +6,13 @@
 #    By: shovsepy <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/09 18:35:02 by shovsepy          #+#    #+#              #
-#    Updated: 2021/07/09 18:35:03 by shovsepy         ###   ########.fr        #
+#    Updated: 2021/07/12 21:23:33 by shovsepy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= fdf
 
-SRCS		= ./src/main.c ./src/ft_read.c ./src/ft_draw.c
+SRCS		= ./src/main.c ./src/ft_read.c ./src/ft_draw.c ./src/utils.c
 OBJS		= $(SRCS:.c=.o)
 
 CC			= gcc
@@ -30,7 +30,6 @@ $(NAME):	$(OBJS)
 	@$(MAKE) -C ./mlx
 	@$(MAKE) -C ./libft
 	@$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit ./libft/libft.a -o $(NAME) 
-	@$(RM) $(OBJS)
 
 clean:
 	@$(MAKE) -C ./libft fclean
