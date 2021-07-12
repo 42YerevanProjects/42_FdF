@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsjoberg <lsjoberg@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: shovsepy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/29 12:22:20 by lsjoberg          #+#    #+#             */
-/*   Updated: 2021/07/09 15:35:16 by shovsepy         ###   ########.fr       */
+/*   Created: 2021/07/12 21:41:23 by shovsepy          #+#    #+#             */
+/*   Updated: 2021/07/12 21:41:28 by shovsepy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ static void	add_heap_to_static(char **s, char *buf)
 	}
 }
 
+static	int	ft_exit(char **line)
+{
+	*line = NULL;
+	return (0);
+}
+
 int	get_next_line(const int fd, char **line)
 {
 	static char	*s[MAX_FD];
@@ -55,18 +61,17 @@ int	get_next_line(const int fd, char **line)
 
 	if (!line || fd < 0 || fd >= MAX_FD || (read(fd, s[fd], 0) < 0))
 		return (-1);
-	while ((ret = read(fd, heap, BUFF_SIZE)) > 0)
+	ret = read(fd, heap, BUFF_SIZE);
+	while (ret > 0)
 	{
 		heap[ret] = '\0';
 		add_heap_to_static(&s[fd], heap);
 		if (verify_new_line(&s[fd], line))
 			return (1);
+		ret = read(fd, heap, BUFF_SIZE);
 	}
 	if (!s[fd] || s[fd][0] == '\0')
-	{
-		*line = NULL;
-		return (0);
-	}
+		return (ft_exit(line));
 	if (s[fd])
 		if (verify_new_line(&(s[fd]), line))
 			return (1);

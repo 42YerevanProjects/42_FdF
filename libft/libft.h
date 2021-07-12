@@ -6,7 +6,7 @@
 /*   By: shovsepy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 19:17:36 by shovsepy          #+#    #+#             */
-/*   Updated: 2021/07/09 15:33:22 by shovsepy         ###   ########.fr       */
+/*   Updated: 2021/07/12 21:10:10 by shovsepy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE	(1)
-# define MAX_FD (1024 + 1)
+# define MAX_FD (1025)
 
 typedef struct s_list
 {
@@ -40,6 +40,7 @@ void				*ft_memmove(void *dest, const void *src, size_t len);
 void				*ft_memchr(const void *str, int c, size_t len);
 void				*ft_calloc(size_t count, size_t size);
 void				ft_error(char *message, int exit_code);
+void				ft_free(void **str);
 
 int					ft_memcmp(const void *str1, const void *str2, size_t len);
 int					ft_isalpha(int c);
