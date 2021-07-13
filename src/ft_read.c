@@ -12,6 +12,11 @@
 
 #include "../includes/fdf.h"
 
+/*
+** Gets the number values in each line from the fdf file.
+** If there's an invalid character in the line, prints an error message.
+*/
+
 static int	count_values(char *line)
 {
 	int		len;
@@ -31,6 +36,14 @@ static int	count_values(char *line)
 	}
 	return (len);
 }
+
+/*
+** Count and initializes the number of lines (rows) and columns (cols )that the file has.
+** This value is used to allocate the correct memory size
+** for the two dimensional array.
+** If the total values from every line is not equal to the other lines,
+** there is an error with the fdf file...
+*/
 
 static void	count_lines(t_fdf *fdf, char *map_file)
 {
@@ -59,6 +72,11 @@ static void	count_lines(t_fdf *fdf, char *map_file)
 	fdf->map.height = rows;
 }
 
+/*
+** Gets and store the values from the file into a two dimensional array,
+** by atoi-ing every little value (converting from ascii to ints).
+*/
+
 static void	get_values(t_fdf *fdf, int y, int z, char *line)
 {
 	int		i;
@@ -76,6 +94,11 @@ static void	get_values(t_fdf *fdf, int y, int z, char *line)
 		ft_free((void **) split);
 	}
 }
+
+/*
+** Read the fdf file, allocates in memory the correct size of the height
+** and width of the map.
+*/
 
 void	ft_read(char *map_file, t_fdf *fdf)
 {
