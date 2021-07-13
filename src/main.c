@@ -12,6 +12,10 @@
 
 #include "../includes/fdf.h"
 
+/*
+** Display a usage message on how to run and use fdf.
+*/
+
 static void	fdf_usage(void)
 {
 	ft_putstr_fd("Usage:\n\t", 1);
@@ -27,6 +31,10 @@ static void	fdf_usage(void)
 		<-> plain).\n", 1);
 	ft_putstr_fd("\t[W][A][S][D] -> Move the map.\n", 1);
 }
+
+/*
+** Reset the map to the initial values.
+*/
 
 static void	reset_map(t_fdf *fdf)
 {
@@ -45,12 +53,24 @@ static void	reset_map(t_fdf *fdf)
 	fdf->color.blue = 0x4F;
 }
 
+/*
+** Colorize the map with a random color.
+** Colors go from 0x00 to 0x7F, because of technical issues (integer overflow).
+*/
+
 static void	random_color(t_fdf *fdf)
 {
 	fdf->color.red = (rand() % 0x7F);
 	fdf->color.green = (rand() % 0x7F);
 	fdf->color.blue = (rand() % 0x7F);
 }
+
+/*
+** Assign a key code (macros defined in "includes/keys.h") to a specific task,
+** like changing colors, moving the map, changing the view, zoom level, etc.
+** There is an ugly code for changing the view (angle) of the map, because of
+** norm... I guess? Everytime "map.isometric" isn't even, rotate the map.
+*/
 
 static int	fdf_keys(int keycode, t_fdf *fdf)
 {
@@ -80,6 +100,13 @@ static int	fdf_keys(int keycode, t_fdf *fdf)
 		key_space(fdf);
 	return (0);
 }
+
+/*
+** Main function, creates the fdf structure and a network connection between
+** the program and the x-server, making it possible to draw on the screen,
+** and getting the keyboard inputs.
+** Didn't used mlx_key_hook, because I wanted to press and hold the keys :D
+*/
 
 int	main(int argc, char **argv)
 {
