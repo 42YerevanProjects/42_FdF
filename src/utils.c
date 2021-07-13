@@ -1,5 +1,7 @@
 #include "../includes/fdf.h"
 
+/* The helper functions that help to keep the code according to the norm */
+
 void	key_space(t_fdf *fdf)
 {
 	if (fdf->map.isometric++ % 2)
