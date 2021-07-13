@@ -13,6 +13,20 @@
 #ifndef KEYS_H
 # define KEYS_H
 
+/*
+** Source: http://stackoverflow.com/a/16125341 | <events.h>
+**
+** These constants are the virtual keycodes defined originally in
+** Inside Mac Volume V, pg. V-191. They identify physical keys on a
+** keyboard. Those constants with "ANSI" in the name are labeled
+** according to the key position on an ANSI-standard US keyboard.
+** For example, kVK_ANSI_A indicates the virtual keycode for the key
+** with the letter 'A' in the US keyboard layout. Other keyboard
+** layouts may have the 'A' key label on a different physical key;
+** in this case, pressing 'A' will generate a different virtual
+** keycode.
+*/
+
 # define KEY_ANSI_A			 		(0X00)
 # define KEY_ANSI_S			 		(0X01)
 # define KEY_ANSI_D			 		(0X02)
@@ -79,6 +93,10 @@
 # define KEY_ANSI_KEYPAD8	   		(0X5B)
 # define KEY_ANSI_KEYPAD9	   		(0X5C)
 
+/*
+** Keycodes for keys that are independent of keyboard layout.
+** These ones doesn't follow the ANSI-standard US keyboard.
+*/
 
 # define KEY_RETURN			 		(0X24)
 # define KEY_TAB					(0X30)
@@ -129,4 +147,3 @@
 # define KEY_UPARROW				(0X7E)
 
 #endif
-
