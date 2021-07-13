@@ -48,5 +48,5 @@ Controls:
 ## Additional information
 
 If you are going to use this code for your 42 project make sure to delete all the comments 
-and double check the norms. To understand the project better you can read the [a relative link](FdF.pdf).
+and double check the norms. To understand the project better you can read the [FdF.pdf](FdF.pdf).
 If you find any bugs write an issue.
